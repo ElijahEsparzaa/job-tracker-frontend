@@ -13,10 +13,16 @@ export default function JobList() {
       .catch(err => console.error('Error fetching jobs:', err));
   }, []);
 
+  const handleDelete = (id) => {
+    setJobs(prevJobs => prevJobs.filter(job => job._id !== id));
+  };
+
   return (
     <div>
       <h2>Job List</h2>
-      {jobs.map(job => <JobItem key={job._id} job={job} />)}
+      {jobs.map(job => (
+        <JobItem key={job._id} job={job} onDelete={handleDelete} />
+      ))}
     </div>
   );
 }
