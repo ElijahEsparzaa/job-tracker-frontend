@@ -25,11 +25,18 @@ function App() {
     setJobs(prevJobs => prevJobs.filter(job => job._id !== id));
   };
 
+  // Update job in state after edit
+  const handleUpdate = (updatedJob) => {
+    setJobs(prevJobs => prevJobs.map(job => 
+      job._id === updatedJob._id ? updatedJob : job
+    ));
+  };
+
   return (
     <div style={{ padding: 20 }}>
       <h1>Job Tracker</h1>
       <JobForm onAdd={addJob} />
-      <JobList jobs={jobs} onDelete={handleDelete} />
+      <JobList jobs={jobs} onDelete={handleDelete} onUpdate={handleUpdate} />
     </div>
   );
 }
