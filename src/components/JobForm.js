@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const BASE_URL = 'https://job-tracker-backend-tqc2.onrender.com';
+
 export default function JobForm({ onAdd }) {
   const [job, setJob] = useState({
     company: '', position: '', link: '', status: '', notes: ''
@@ -12,7 +14,7 @@ export default function JobForm({ onAdd }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post('http://localhost:5000/api/jobs', job);
+    const res = await axios.post(`${BASE_URL}/api/jobs`, job);
     onAdd(res.data);
     setJob({ company: '', position: '', link: '', status: '', notes: '' });
   };
