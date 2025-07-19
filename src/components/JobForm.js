@@ -5,7 +5,11 @@ const BASE_URL = 'https://job-tracker-backend-tqc2.onrender.com';
 
 export default function JobForm({ onAdd }) {
   const [job, setJob] = useState({
-    company: '', position: '', link: '', status: '', notes: ''
+    company: '',
+    position: '',
+    link: '',
+    status: '',
+    notes: ''
   });
 
   const handleChange = (e) => {
@@ -14,9 +18,13 @@ export default function JobForm({ onAdd }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post(`${BASE_URL}/api/jobs`, job);
-    onAdd(res.data);
-    setJob({ company: '', position: '', link: '', status: '', notes: '' });
+    try {
+      const res = await axios.post(`${BASE_URL}/api/jobs`, job);
+      onAdd(res.data);
+      setJob({ company: '', position: '', link: '', status: '', notes: '' });
+    } catch (error) {
+      console.error('Failed to add job:', error);
+    }
   };
 
   return (
