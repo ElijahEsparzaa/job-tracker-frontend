@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const BASE_URL = 'https://job-tracker-backend-tqc2.onrender.com';
 
-export default function JobForm({ onAdd }) {
+export default function JobForm({ onAdd }) 
+{
   const [job, setJob] = useState({
     company: '',
     position: '',

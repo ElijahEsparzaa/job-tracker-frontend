@@ -7,7 +7,7 @@ export default function JobItem({ job, onDelete, onUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
   const [status, setStatus] = useState(job.status);
 
-  // Delete job handler
+  //Delete job handler
   const handleDelete = async () => {
     try {
       await axios.delete(`${BASE_URL}/api/jobs/${job._id}`);
@@ -17,24 +17,24 @@ export default function JobItem({ job, onDelete, onUpdate }) {
     }
   };
 
-  // Handle change of status input
+  //Handle change of status input
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
 
-  // Save updated status to backend
+  //Save updated status to backend
   const handleStatusSave = async () => {
     try {
       const updatedJob = { ...job, status };
       const res = await axios.put(`${BASE_URL}/api/jobs/${job._id}`, updatedJob);
-      onUpdate(res.data); // Update parent UI with new job data
+      onUpdate(res.data); //Update parent UI with new job data
       setIsEditing(false);
     } catch (error) {
       console.error('Failed to update status:', error);
     }
   };
 
-  // Cancel editing and revert status input to original
+  //Cancel editing and revert status input to original
   const handleCancel = () => {
     setIsEditing(false);
     setStatus(job.status);
